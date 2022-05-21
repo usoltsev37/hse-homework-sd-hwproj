@@ -1,19 +1,16 @@
 <template>
   <h1>Student Page</h1>
   <StudentPage/>
-  <TestComponent msg="РАБОТАЙ СУКААА"/>
 </template>
 
 <script>
 import StudentPage from "@/components/StudentPage";
-import TestComponent from "@/components/TestComponent";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Student',
   components: {
-    StudentPage,
-    TestComponent
+    StudentPage
   }
 }
 </script>
