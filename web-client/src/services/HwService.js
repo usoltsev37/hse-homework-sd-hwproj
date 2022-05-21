@@ -1,4 +1,9 @@
 const axios = require('axios');
+axios.create({
+    headers: {
+        "Content-type": "application/json"
+    }
+});
 
 export async function getHomeworks() {
     const currentDate = new Date();
@@ -11,17 +16,21 @@ export async function getHomeworks() {
 }
 
 export async function submitHomeworkSolution(submission) {
-    const response = await axios.post("hw/submit", {hwSubmission: submission});
+    console.log(submission);
+    const response = await axios.post("hw/submit", submission);
     return response.data;
 }
 
 export async function getSubmissions(user) {
-    const response = await axios.get("hw/submissions", { params: {user: user} })
+    console.log(user);
+    const response = await axios.get("hw/submissions", {
+        params: user
+    })
     return response.data
 }
 
 export async function addHomework(homework) {
-    await axios.post("hw/add", {homework: homework});
+    await axios.post("hw/add", homework);
 }
 
 export async function evaluateSubmission(mark, comment, submissionId) {

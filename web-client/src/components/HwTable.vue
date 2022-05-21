@@ -30,9 +30,3 @@ export default {
   props: ['homeworks']
 }
 </script>
-
-<style>
-table, th, td {
-  border: 1px solid black;
-}
-</style>

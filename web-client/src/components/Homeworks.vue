@@ -13,7 +13,7 @@ import { getHomeworks } from "@/services/HwService";
 import HwTable from "@/components/HwTable";
 
 export default {
-  name: "StudentPage",
+  name: "HomeWorks",
   components: {
     HwTable,
   },

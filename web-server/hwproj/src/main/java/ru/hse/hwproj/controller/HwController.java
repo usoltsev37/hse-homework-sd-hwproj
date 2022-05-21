@@ -35,8 +35,8 @@ public class HwController {
     }
 
     @GetMapping("/submissions")
-    public List<HwSubmission> getSubmissions(@RequestBody User user) {
-        return hwSubmissionService.getSortedSubmissions(user);
+    public List<HwSubmission> getSubmissions(@RequestParam Long userId, @RequestParam Boolean isTeacher) {
+        return hwSubmissionService.getSortedSubmissions(userId, isTeacher);
     }
 
     @PostMapping("/add")
