@@ -22,7 +22,6 @@ export async function submitHomeworkSolution(submission) {
 }
 
 export async function getSubmissions(user) {
-    console.log(user);
     const response = await axios.get("hw/submissions", {
         params: user
     })
