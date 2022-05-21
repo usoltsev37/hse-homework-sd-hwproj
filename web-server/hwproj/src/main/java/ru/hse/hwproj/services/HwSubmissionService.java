@@ -14,12 +14,12 @@ public class HwSubmissionService {
     @Autowired
     private HwSubmissionRepository hwSubmissionRepository;
 
-    private RabbitRepository rabbitRepository;
+    private final RabbitRepository rabbitRepository = new RabbitRepository();
 
 
-    public List<HwSubmission> getSortedSubmissions(User user) {
-        return user.isTeacher() ? hwSubmissionRepository.findAllByOrderByCreatedAt()
-                : hwSubmissionRepository.findAllByStudentIdOrderByCreatedAt(user.getId());
+    public List<HwSubmission> getSortedSubmissions(Long userId, Boolean isTeacher) {
+        return isTeacher ? hwSubmissionRepository.findAllByOrderByCreatedAt()
+                : hwSubmissionRepository.findAllByStudentIdOrderByCreatedAt(userId);
     }
 
     public void evaluateSolution(Long submissionId, Integer mark, String comment) {
@@ -27,6 +27,7 @@ public class HwSubmissionService {
     }
 
     public void submitHomeworkSolution(HwSubmission hwSubmission) {
+        hwSubmissionRepository.save(hwSubmission);
         rabbitRepository.submitHwSolution(hwSubmission);
     }
 }
