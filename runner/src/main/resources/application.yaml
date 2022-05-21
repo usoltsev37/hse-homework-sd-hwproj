@@ -1,7 +1,0 @@
-spring:
-  profiles:
-    active: usage_message, receiver
-
-logging:
-  level:
-    org: ERROR

@@ -1,8 +1,8 @@
 package ru.hse.hwproj.logic.checker;
 
-import ru.hse.hwproj.dto.HwSubmissionDto;
+import ru.hse.hwproj.model.HwSubmission;
 
 public interface SubmissionChecker {
 
-    HwSubmissionDto checkSubmission(HwSubmissionDto hwSubmission);
+    HwSubmission checkSubmission(HwSubmission hwSubmission);
 }
