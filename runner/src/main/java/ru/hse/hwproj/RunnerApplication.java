@@ -21,7 +21,7 @@ public class RunnerApplication {
 
     @Profile("receiver")
     @Bean
-    public CommandLineRunner tutorial() {
+    public CommandLineRunner runner() {
         return new RabbitRunner();
     }
 
