@@ -12,9 +12,10 @@ import java.util.List;
 @Service
 public class HwSubmissionService {
 
-    private final HwSubmissionRepository hwSubmissionRepository;
-    private final RabbitRepository rabbitRepository;
 
+    private final RabbitRepository rabbitRepository = new RabbitRepository();
+    private final HwSubmissionRepository hwSubmissionRepository;
+    
     public HwSubmissionService(
             @Autowired HwSubmissionRepository hwSubmissionRepository,
             @Autowired RabbitRepository rabbitRepository
@@ -23,9 +24,9 @@ public class HwSubmissionService {
         this.rabbitRepository = rabbitRepository;
     }
 
-    public List<HwSubmission> getSortedSubmissions(User user) {
-        return user.isTeacher() ? hwSubmissionRepository.findAllByOrderByCreatedAt()
-                : hwSubmissionRepository.findAllByStudentIdOrderByCreatedAt(user.getId());
+    public List<HwSubmission> getSortedSubmissions(Long userId, Boolean isTeacher) {
+        return isTeacher ? hwSubmissionRepository.findAllByOrderByCreatedAt()
+                : hwSubmissionRepository.findAllByStudentIdOrderByCreatedAt(userId);
     }
 
     public void evaluateSubmission(Long submissionId, Integer mark, String comment) {
@@ -33,6 +34,7 @@ public class HwSubmissionService {
     }
 
     public void submitHomeworkSolution(HwSubmission hwSubmission) {
-        rabbitRepository.submitHomeworkSolution(hwSubmission);
+        hwSubmissionRepository.save(hwSubmission);
+        rabbitRepository.submitHwSolution(hwSubmission);
     }
 }
