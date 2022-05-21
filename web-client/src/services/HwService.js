@@ -1,5 +1,11 @@
 const axios = require('axios');
 
+axios.create({
+    headers: {
+        "Content-type": "application/json"
+    }
+});
+
 export async function getHomeworks() {
     const currentDate = new Date();
     const response = await axios.get("hw/all", {
@@ -16,7 +22,7 @@ export async function submitHomeworkSolution(submission) {
 }
 
 export async function getSubmissions(user) {
-    const response = await axios.get("hw/submissions", { params: {user: user} })
+    const response = await axios.get("hw/submissions", { data: user} )
     return response.data
 }
 

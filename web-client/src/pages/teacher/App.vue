@@ -1,16 +1,16 @@
 <template>
   <img alt="Vue logo" src="../../assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <TeacherPage/>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
+import TeacherPage from "@/components/TeacherPage";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Teacher',
   components: {
-    HelloWorld
+    TeacherPage
   }
 }
 </script>
