@@ -6,4 +6,5 @@ import ru.hse.hwproj.model.Homework;
 
 @Repository
 public interface HomeworkRepository extends JpaRepository<Homework, Long> {
+
 }

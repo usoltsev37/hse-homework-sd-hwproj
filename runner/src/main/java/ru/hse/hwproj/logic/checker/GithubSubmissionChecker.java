@@ -1,6 +1,6 @@
 package ru.hse.hwproj.logic.checker;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.stereotype.Component;
 import ru.hse.hwproj.model.HwSubmission;
 
 import java.io.IOException;
@@ -9,7 +9,9 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Component
 public class GithubSubmissionChecker implements SubmissionChecker {
+
     @Override
     public HwSubmission checkSubmission(String title, HwSubmission hwSubmission) {
         Path fileNamePath = Path.of(hwSubmission.getSolution()).getFileName();
@@ -34,9 +36,7 @@ public class GithubSubmissionChecker implements SubmissionChecker {
 
     private Process executeCommand(String... args) {
         try {
-            return new ProcessBuilder().command(
-                    args
-            ).start();
+            return new ProcessBuilder().command(args).start();
         } catch (IOException e) {
             Logger.getGlobal().log(Level.WARNING, "Error during external command execution");
             throw new RuntimeException();

@@ -15,16 +15,20 @@ import java.util.logging.Logger;
 @Service
 public class RabbitService {
 
-    @Autowired
-    SubmissionChecker submissionChecker;
+    private final SubmissionChecker submissionChecker;
+    private final HwSubmissionRepository hwSubmissionRepository;
+    private final HomeworkRepository homeworkRepository;
+    private final ExecutorService threadPool = Executors.newFixedThreadPool(4);
 
-    @Autowired
-    HwSubmissionRepository hwSubmissionRepository;
-
-    @Autowired
-    HomeworkRepository homeworkRepository;
-
-    ExecutorService threadPool = Executors.newFixedThreadPool(4);
+    public RabbitService(
+            @Autowired SubmissionChecker submissionChecker,
+            @Autowired HwSubmissionRepository hwSubmissionRepository,
+            @Autowired HomeworkRepository homeworkRepository
+    ) {
+        this.submissionChecker = submissionChecker;
+        this.hwSubmissionRepository = hwSubmissionRepository;
+        this.homeworkRepository = homeworkRepository;
+    }
 
     public void checkSubmission(HwSubmission hwSubmission) {
         Homework homework = homeworkRepository.getReferenceById(hwSubmission.getHwId());

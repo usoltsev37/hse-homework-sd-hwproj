@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.hse.hwproj.model.HwSubmission;
 
 @Repository
-public interface HwSubmissionRepository extends JpaRepository<HwSubmission, Long>  {
+public interface HwSubmissionRepository extends JpaRepository<HwSubmission, Long> {
 
 }
