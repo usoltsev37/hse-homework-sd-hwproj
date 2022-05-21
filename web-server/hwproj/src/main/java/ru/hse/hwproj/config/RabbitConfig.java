@@ -4,7 +4,7 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import ru.hse.hwproj.controller.RabbitController;
+import ru.hse.hwproj.repository.RabbitRepository;
 
 @Configuration
 public class RabbitConfig {
@@ -14,9 +14,9 @@ public class RabbitConfig {
         return new Queue("homework");
     }
 
-    @Profile("receiver")
+    @Profile("sender")
     @Bean
-    public RabbitController receiver() {
-        return new RabbitController();
+    public RabbitRepository sender() {
+        return new RabbitRepository();
     }
 }
