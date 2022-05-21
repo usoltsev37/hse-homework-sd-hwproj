@@ -1,16 +1,26 @@
 <template>
-  <img alt="Vue logo" src="../../assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Teacher Page</h1>
+  <Homeworks/>
+  <HwAdd/>
+  <MarkHw/>
+  <SubmissionsForTeacher/>
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
+
+import Homeworks from "@/components/Homeworks";
+import SubmissionsForTeacher from "@/components/SubmissionsForTeacher";
+import HwAdd from "@/components/HwAdd";
+import MarkHw from "@/components/MarkHw";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Teacher',
   components: {
-    HelloWorld
+    Homeworks,
+    SubmissionsForTeacher,
+    HwAdd,
+    MarkHw
   }
 }
 </script>

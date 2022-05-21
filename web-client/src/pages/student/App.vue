@@ -8,7 +8,7 @@
 import Homeworks from "@/components/Homeworks";
 import Submission from "@/components/Submission";
 
-import { submitHomeworkSolution, getSubmissions } from "@/services/HwService"
+import { submitHomeworkSolution } from "@/services/HwService"
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
