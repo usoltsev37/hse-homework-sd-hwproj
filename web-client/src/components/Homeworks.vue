@@ -4,7 +4,7 @@
     <table class="table table-bordered">
       <thead>
       <tr>
-        <th>Homework Id</th>
+        <th>№</th>
         <th>Title</th>
         <th>Description</th>
         <th>Start</th>
