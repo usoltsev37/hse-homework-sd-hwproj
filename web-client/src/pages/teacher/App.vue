@@ -16,4 +16,5 @@ export default {
 </script>
 
 <style>
+    @import "@/assets/style/style.css";
 </style>

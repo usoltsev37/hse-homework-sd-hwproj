@@ -1,33 +1,45 @@
 <template>
-  <div class="container">
-    <h2>Homeworks</h2>
-    <table class="table table-bordered">
-      <thead>
-      <tr>
-        <th>№</th>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Start</th>
-        <th>DeadLine</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="item in homeworks" :key="item.id">
-        <td>{{ item.id }}</td>
-        <td>{{ item.title }}</td>
-        <td>{{ item.taskDescription }}</td>
-        <td>{{ item.publicationTime }}</td>
-        <td>{{ item.deadline }}</td>
-      </tr>
-      </tbody>
-    </table>
+  <h2>Homeworks</h2>
+  <div class="container mrgnbtm">
+    <button @click='getHomeworks()' type="button" class="btn btn-warning">Get Homeworks</button>
+  </div>
+  <div class="row mrgnbtm">
+    <HwTable v-if="homeworks.length > 0" :homeworks="homeworks" />
   </div>
 </template>
 
 <script>
+import { getHomeworks } from "@/services/HwService";
+import HwTable from "@/components/HwTable";
+
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
-  name: 'Homeworks',
-  props: ['homeworks']
+  name: "StudentPage",
+  components: {
+    HwTable,
+  },
+
+  data() {
+    return {
+      homeworks: []
+    }
+  },
+
+  methods: {
+    getHomeworks() {
+      getHomeworks().then(response => {
+        this.homeworks = response
+      })
+    }
+
+  },
+
+  mounted () {
+    this.getHomeworks();
+  }
 }
+
 </script>
+
+<style scoped>
+
+</style>
