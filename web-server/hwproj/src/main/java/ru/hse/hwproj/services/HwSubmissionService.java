@@ -3,7 +3,6 @@ package ru.hse.hwproj.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hse.hwproj.models.HwSubmission;
-import ru.hse.hwproj.models.User;
 import ru.hse.hwproj.repository.HwSubmissionRepository;
 import ru.hse.hwproj.repository.RabbitRepository;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public class HwSubmissionService {
 
 
-    private final RabbitRepository rabbitRepository = new RabbitRepository();
+    private final RabbitRepository rabbitRepository;
     private final HwSubmissionRepository hwSubmissionRepository;
     
     public HwSubmissionService(
@@ -35,6 +34,6 @@ public class HwSubmissionService {
 
     public void submitHomeworkSolution(HwSubmission hwSubmission) {
         hwSubmissionRepository.save(hwSubmission);
-        rabbitRepository.submitHwSolution(hwSubmission);
+        rabbitRepository.submitHomeworkSolution(hwSubmission);
     }
 }
