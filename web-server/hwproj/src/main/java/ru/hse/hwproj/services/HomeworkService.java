@@ -11,14 +11,18 @@ import java.util.stream.Collectors;
 
 @Service
 public class HomeworkService {
-    @Autowired
-    private HomeworkRepository homeworkRepository;
+
+    private final HomeworkRepository homeworkRepository;
+
+    public HomeworkService(@Autowired HomeworkRepository homeworkRepository) {
+        this.homeworkRepository = homeworkRepository;
+    }
 
     public List<Homework> getSortedHomeworks(LocalDateTime time) {
 
-         return homeworkRepository.findAllByOrderByDeadline().stream()
-                 .filter(hw -> time.compareTo(hw.getPublicationTime()) > 0)
-                 .collect(Collectors.toList());
+        return homeworkRepository.findAllByOrderByDeadline().stream()
+                .filter(hw -> time.compareTo(hw.getPublicationTime()) > 0)
+                .collect(Collectors.toList());
 
     }
 

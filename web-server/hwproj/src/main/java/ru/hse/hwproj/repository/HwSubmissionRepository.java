@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public interface HwSubmissionRepository extends JpaRepository<HwSubmission, Long> {
     List<HwSubmission> findAllByOrderByCreatedAt();
+
     List<HwSubmission> findAllByStudentIdOrderByCreatedAt(Long studentId);
 
     @Modifying(clearAutomatically = true)

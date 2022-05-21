@@ -14,7 +14,6 @@ public class RabbitConfig {
         return new Queue("homework");
     }
 
-    @Profile("sender")
     @Bean
     public RabbitRepository sender() {
         return new RabbitRepository();
