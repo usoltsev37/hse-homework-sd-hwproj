@@ -2,10 +2,8 @@ package ru.hse.hwproj.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.hse.hwproj.model.HwSubmission;
+import ru.hse.hwproj.model.Homework;
 
 @Repository
-public interface RabbitRepository extends JpaRepository<HwSubmission, Long> {
-
-
+public interface HomeworkRepository extends JpaRepository<Homework, Long> {
 }

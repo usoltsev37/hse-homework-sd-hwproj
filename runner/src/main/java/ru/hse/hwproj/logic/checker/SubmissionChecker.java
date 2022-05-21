@@ -4,5 +4,5 @@ import ru.hse.hwproj.model.HwSubmission;
 
 public interface SubmissionChecker {
 
-    HwSubmission checkSubmission(HwSubmission hwSubmission);
+    HwSubmission checkSubmission(String title, HwSubmission hwSubmission);
 }

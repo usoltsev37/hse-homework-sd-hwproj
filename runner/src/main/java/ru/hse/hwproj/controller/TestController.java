@@ -18,14 +18,6 @@ public class TestController {
 
     @GetMapping("/all")
     public void getHomeworks() {
-        rabbitController.pollHwSubmission(new HwSubmission()
-                .setId(1L)
-                .setHwId(1L)
-                .setStudentId(1L)
-                .setCheckerVerdict("")
-                .setComment("")
-                .setCreatedAt(LocalDateTime.now())
-                .setMark(1)
-                .setSolution(""));
+        rabbitController.pollHwSubmission(new HwSubmission(1L, 1L, 1L, "https://github.com/usoltsev37/hse-homework-sd-hwproj", LocalDateTime.now(), 1, null, null));
     }
 }
