@@ -11,18 +11,25 @@ import java.util.List;
 
 @Service
 public class HwSubmissionService {
-    @Autowired
-    private HwSubmissionRepository hwSubmissionRepository;
+
 
     private final RabbitRepository rabbitRepository = new RabbitRepository();
-
+    private final HwSubmissionRepository hwSubmissionRepository;
+    
+    public HwSubmissionService(
+            @Autowired HwSubmissionRepository hwSubmissionRepository,
+            @Autowired RabbitRepository rabbitRepository
+    ) {
+        this.hwSubmissionRepository = hwSubmissionRepository;
+        this.rabbitRepository = rabbitRepository;
+    }
 
     public List<HwSubmission> getSortedSubmissions(Long userId, Boolean isTeacher) {
         return isTeacher ? hwSubmissionRepository.findAllByOrderByCreatedAt()
                 : hwSubmissionRepository.findAllByStudentIdOrderByCreatedAt(userId);
     }
 
-    public void evaluateSolution(Long submissionId, Integer mark, String comment) {
+    public void evaluateSubmission(Long submissionId, Integer mark, String comment) {
         hwSubmissionRepository.updateMarkAndCommentById(submissionId, mark, comment);
     }
 

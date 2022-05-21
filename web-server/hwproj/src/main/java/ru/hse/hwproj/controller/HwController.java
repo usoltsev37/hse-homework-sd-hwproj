@@ -1,6 +1,5 @@
 package ru.hse.hwproj.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +16,21 @@ import java.util.List;
 @RestController
 @RequestMapping("/hw")
 public class HwController {
-    @Autowired
-    private HwSubmissionService hwSubmissionService;
 
-    @Autowired
-    private HomeworkService homeworkService;
+    private final HwSubmissionService hwSubmissionService;
+    private final HomeworkService homeworkService;
+
+    public HwController(
+            @Autowired HwSubmissionService hwSubmissionService,
+            @Autowired HomeworkService homeworkService
+    ) {
+        this.hwSubmissionService = hwSubmissionService;
+        this.homeworkService = homeworkService;
+    }
 
     @GetMapping("/all")
     public List<Homework> getHomeworks(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-                                           LocalDateTime date) {
+                                       LocalDateTime date) {
         return homeworkService.getSortedHomeworks(date);
     }
 
@@ -48,7 +53,7 @@ public class HwController {
     public ResponseEntity<?> evaluateSubmission(@RequestParam Integer mark,
                                                 @RequestParam String comment,
                                                 @PathVariable("submission_id") Long submissionId) {
-        hwSubmissionService.evaluateSolution(submissionId, mark, comment);
+        hwSubmissionService.evaluateSubmission(submissionId, mark, comment);
         return ResponseEntity.ok("OK!");
     }
 }
