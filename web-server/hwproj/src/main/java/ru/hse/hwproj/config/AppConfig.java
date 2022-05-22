@@ -9,12 +9,7 @@ import ru.hse.hwproj.repository.RabbitRepository;
 
 @Configuration
 public class AppConfig {
-
-    @Bean
-    public RabbitRepository rabbitRepository() {
-        return new RabbitRepository();
-    }
-
+    
     @Bean
     public ConnectionFactory connectionFactory() {
         return new CachingConnectionFactory("localhost");

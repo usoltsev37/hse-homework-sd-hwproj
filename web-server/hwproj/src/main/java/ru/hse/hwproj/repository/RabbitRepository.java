@@ -9,11 +9,16 @@ import ru.hse.hwproj.models.HwSubmission;
 @Component
 public class RabbitRepository {
 
-    @Autowired
-    private RabbitTemplate template;
+    private final RabbitTemplate template;
+    private final Queue queue;
 
-    @Autowired
-    private Queue queue;
+    public RabbitRepository(
+            @Autowired RabbitTemplate rabbitTemplate,
+            @Autowired Queue queue
+    ) {
+        this.template = rabbitTemplate;
+        this.queue = queue;
+    }
 
     public void submitHomeworkSolution(HwSubmission hwSubmission) {
         this.template.convertAndSend(queue.getName(), hwSubmission);
