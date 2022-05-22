@@ -14,8 +14,6 @@ import java.util.List;
 public interface HwSubmissionRepository extends JpaRepository<HwSubmission, Long> {
     List<HwSubmission> findAllByOrderByCreatedAt();
 
-    List<HwSubmission> findAllByStudentIdOrderByCreatedAt(Long studentId);
-
     @Modifying(clearAutomatically = true)
     @Transactional
     @Query("update HwSubmission sub set sub.mark = :mark, sub.comment = :comment where sub.id = :id")

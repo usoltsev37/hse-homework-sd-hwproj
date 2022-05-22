@@ -26,11 +26,11 @@ public class HwSubmissionService {
         this.rabbitRepository = rabbitRepository;
     }
 
-    public List<HwSubmission> getSortedSubmissions(Long userId, Boolean isTeacher) {
+    public List<HwSubmission> getSortedSubmissions() {
         return LoggingHelper.logWrap(
                 LOGGER,
                 "getSortedSubmissions",
-                () -> loggingGetSortedSubmissions(userId, isTeacher)
+                hwSubmissionRepository::findAllByOrderByCreatedAt
         );
     }
 
@@ -48,11 +48,6 @@ public class HwSubmissionService {
                 "submitHomeworkSolution",
                 () -> loggingSubmitHomeworkSolution(hwSubmission)
         );
-    }
-
-    private List<HwSubmission> loggingGetSortedSubmissions(Long userId, Boolean isTeacher) {
-        return isTeacher ? hwSubmissionRepository.findAllByOrderByCreatedAt()
-                : hwSubmissionRepository.findAllByStudentIdOrderByCreatedAt(userId);
     }
 
     private void loggingSubmitHomeworkSolution(HwSubmission hwSubmission) {

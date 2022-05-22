@@ -32,8 +32,11 @@ public class HwController {
     }
 
     @GetMapping("/all")
-    public List<Homework> getHomeworks(@RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-                                       LocalDateTime date) {
+    public List<Homework> getHomeworks(
+            @RequestParam
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+            LocalDateTime date
+    ) {
         return LoggingHelper.logWrap(
                 LOGGER,
                 "getHomeworks",
@@ -51,11 +54,11 @@ public class HwController {
     }
 
     @GetMapping("/submissions")
-    public List<HwSubmission> getSubmissions(@RequestParam Long userId, @RequestParam Boolean isTeacher) {
+    public List<HwSubmission> getSubmissions() {
         return LoggingHelper.logWrap(
                 LOGGER,
                 "getSubmissions",
-                () -> hwSubmissionService.getSortedSubmissions(userId, isTeacher)
+                hwSubmissionService::getSortedSubmissions
         );
     }
 

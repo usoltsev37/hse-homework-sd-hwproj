@@ -25,9 +25,6 @@ public class HwSubmission {
     @Column(name = "hw_id")
     private Long hwId;
 
-    @Column(name = "student_id")
-    private Long studentId;
-
     @Column(name = "solution")
     private String solution;
 
