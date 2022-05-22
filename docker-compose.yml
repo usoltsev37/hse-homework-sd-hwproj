@@ -36,10 +36,10 @@ services:
     networks:
       - hwproj
     ports:
-      - "8080:8081"
+      - "8081:8081"
 
   server:
-    build: web-server
+    build: web-server/hwproj
     restart: on-failure
     depends_on:
       - database
@@ -52,7 +52,7 @@ services:
     networks:
       - hwproj
     ports:
-      - "8080:8082"
+      - "8080:8080"
 
 networks:
   hwproj:

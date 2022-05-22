@@ -43,7 +43,6 @@ export default {
        const cur_time = new Date()
        const payload = {
          hwId: this.hwId,
-         studentId: 1,
          solution: this.solution,
          createdAt: cur_time.toISOString()
        }
@@ -53,7 +52,6 @@ export default {
 
     getSubmissions() {
       const params = {
-        userId: 1,
         isTeacher: false
       }
 

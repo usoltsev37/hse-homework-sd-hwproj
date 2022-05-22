@@ -33,6 +33,13 @@ export async function addHomework(homework) {
 }
 
 export async function evaluateSubmission(mark, comment, submissionId) {
-    const response = await axios.patch("hw/sub_id=" + submissionId.toString(), {mark: mark, comment: comment})
+    const response = await axios.patch("hw/sub_id=" + submissionId.toString(),
+        {}, {
+            params: {
+                mark: mark,
+                comment: comment
+            }
+        }
+    )
     return response.data;
 }

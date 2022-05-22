@@ -14,6 +14,7 @@
 
 <script>
 import {addHomework} from "@/services/HwService";
+//import moment from 'moment'
 
 export default {
   name: "HwAdd",
@@ -31,8 +32,9 @@ export default {
       const hw = {
         title: this.title,
         taskDescription: this.description,
-        publishedAt: new Date().toISOString(),
-        deadline: this.deadline,
+        publicationTime: new Date().toISOString(), //moment(new Date()).format('YYYY-DD-MMTHH:MM:SS'),
+        //publishedAt: new Date().toISOString().replace(RegExp("\\d{2}:\\d{2}:\\d{2}.\\d{3}Z$"), "00:00:00.000Z"),
+        deadline: new Date(this.deadline).toISOString()
       }
 
       addHomework(hw).then(response => {

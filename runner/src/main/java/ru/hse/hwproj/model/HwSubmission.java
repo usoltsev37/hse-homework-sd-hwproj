@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,8 +18,9 @@ import java.time.LocalDateTime;
 @Getter
 @Accessors(chain = true)
 @Table(name = "hw_submission")
-public class HwSubmission {
+public class HwSubmission implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     @JsonProperty("id")
     private Long id;
@@ -29,10 +28,6 @@ public class HwSubmission {
     @Column(name = "hw_id")
     @JsonProperty("hwId")
     private Long hwId;
-
-    @Column(name = "student_id")
-    @JsonProperty("studentId")
-    private Long studentId;
 
     @Column(name = "solution")
     @JsonProperty("solution")

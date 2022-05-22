@@ -7,7 +7,7 @@
       <textarea v-model="comment" placeholder="Comment" class="descr"> </textarea>
     </div>
     <div class="btn mrgnbtm">
-      <button @click='evalSubmission()' type="button" class="btn btn-warning">Add homework</button>
+      <button @click='evalSubmission()' type="button" class="btn btn-warning">Submit review</button>
     </div>
   </div>
 

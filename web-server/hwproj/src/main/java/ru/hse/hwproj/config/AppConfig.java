@@ -5,11 +5,10 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.hse.hwproj.repository.RabbitRepository;
 
 @Configuration
 public class AppConfig {
-    
+
     @Bean
     public ConnectionFactory connectionFactory() {
         return new CachingConnectionFactory("localhost");

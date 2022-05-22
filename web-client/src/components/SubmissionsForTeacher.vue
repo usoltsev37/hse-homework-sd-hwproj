@@ -28,7 +28,6 @@ export default {
 
     getSubmissions() {
       const params = {
-        userId: 2,
         isTeacher: true
       }
 

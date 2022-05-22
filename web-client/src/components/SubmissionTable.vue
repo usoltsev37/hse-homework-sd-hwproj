@@ -5,7 +5,6 @@
   <tr>
     <th>№_submission</th>
     <th>№_hw</th>
-    <th>StudentId</th>
     <th>CreatedAt</th>
     <th>Solution</th>
     <th>Mark</th>
@@ -17,7 +16,6 @@
   <tr v-for="item in submissions" :key="item.id">
     <td>{{ item.id }}</td>
     <td>{{ item.hwId }}</td>
-    <td>{{ item.studentId }}</td>
     <td>{{ item.createdAt }}</td>
     <td>{{ item.solution }}</td>
     <td>{{ item.mark }}</td>

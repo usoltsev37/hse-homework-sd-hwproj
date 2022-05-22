@@ -71,10 +71,10 @@ public class HwController {
         );
     }
 
-    @PatchMapping("/sub_id={submission_id}")
-    public ResponseEntity<?> evaluateSubmission(@RequestParam Integer mark,
+    @PatchMapping("/sub_id={submissionId}")
+    public ResponseEntity<?> evaluateSubmission(@RequestParam int mark,
                                                 @RequestParam String comment,
-                                                @PathVariable("submission_id") Long submissionId) {
+                                                @PathVariable long submissionId) {
         LoggingHelper.logWrap(
                 LOGGER,
                 "evaluateSubmission",
