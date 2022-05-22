@@ -11,7 +11,7 @@ public class AppConfig {
 
     @Bean
     public ConnectionFactory connectionFactory() {
-        return new CachingConnectionFactory("localhost");
+        return new CachingConnectionFactory();
     }
 
     @Bean
