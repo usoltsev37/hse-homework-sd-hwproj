@@ -39,11 +39,9 @@ services:
     depends_on:
       - database
       - rabbitmq
-      - server
     links:
       - database
       - rabbitmq
-      - server
     networks:
       - hwproj
     ports:

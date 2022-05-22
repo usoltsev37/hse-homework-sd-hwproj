@@ -4,8 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.hse.hwproj.controller.HwController;
-import ru.hse.hwproj.models.Homework;
+import ru.hse.hwproj.model.Homework;
 import ru.hse.hwproj.repository.HomeworkRepository;
 import ru.hse.hwproj.util.LoggingHelper;
 

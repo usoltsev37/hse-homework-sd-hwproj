@@ -20,10 +20,10 @@ public class GithubSubmissionChecker implements SubmissionChecker {
         String request = "git clone " + hwSubmission.getSolution() + ".git --branch " + title;
 
         try {
-            int gitExitCode = executeCommand("bash", "-c", request).waitFor();
+            int gitExitCode = executeCommand("/bin/bash", "-c", request).waitFor();
             if (gitExitCode != 0) LOGGER.error("Git clone was unsuccessful");
 
-            Process checkerProcess = executeCommand("bash", "script.sh", fileNamePath.toString());
+            Process checkerProcess = executeCommand("/bin/bash", "-c", "script.sh", fileNamePath.toString());
             int checkerExitCode = checkerProcess.waitFor();
 
             String checkerVerdict = new StringBuilder()
@@ -32,19 +32,19 @@ public class GithubSubmissionChecker implements SubmissionChecker {
                     .append(new String(checkerProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8)).toString();
             hwSubmission.setCheckerVerdict(checkerVerdict);
         } catch (InterruptedException | IOException e) {
+            hwSubmission.setCheckerVerdict("Error during checking");
             LOGGER.error("Error during external command execution");
-            throw new RuntimeException(e);
         }
 
         return hwSubmission;
     }
 
-    private Process executeCommand(String... args) {
+    private Process executeCommand(String... args) throws IOException {
         try {
-            return new ProcessBuilder().command(args).start();
+            return new ProcessBuilder(args).start();
         } catch (IOException e) {
             LOGGER.error("Error during external command execution");
-            throw new RuntimeException();
+            throw new IOException();
         }
     }
 }

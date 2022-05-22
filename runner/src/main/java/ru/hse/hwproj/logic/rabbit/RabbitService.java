@@ -41,10 +41,12 @@ public class RabbitService {
     }
 
     public void loggingCheckSubmission(HwSubmission hwSubmission) {
-        Homework homework = homeworkRepository.getReferenceById(hwSubmission.getHwId());
-        Future<HwSubmission> future = threadPool.submit(() -> submissionChecker.checkSubmission(homework.getTitle(), hwSubmission));
+        Homework homework = homeworkRepository.findById(hwSubmission.getHwId()).get();
+        String title = homework.getTitle();
+        Future<HwSubmission> future = threadPool.submit(() -> submissionChecker.checkSubmission(title, hwSubmission));
         try {
-            hwSubmissionRepository.save(future.get());
+            HwSubmission updatedHwSubmission = future.get();
+            hwSubmissionRepository.save(updatedHwSubmission);
         } catch (InterruptedException | ExecutionException e) {
             LOGGER.error("checkSubmission: " + e.getMessage());
         }

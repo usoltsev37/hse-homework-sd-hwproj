@@ -40,11 +40,10 @@ export default {
 
   methods: {
     submitSolution() {
-       const cur_time = new Date()
        const payload = {
          hwId: this.hwId,
          solution: this.solution,
-         createdAt: cur_time.toISOString()
+         createdAt: new Date().toISOString()
        }
        this.$emit('submitSolution', payload)
        this.clearForm()

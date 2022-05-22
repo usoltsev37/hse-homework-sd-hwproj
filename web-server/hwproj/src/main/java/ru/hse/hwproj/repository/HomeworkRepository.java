@@ -2,7 +2,7 @@ package ru.hse.hwproj.repository;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.hse.hwproj.models.Homework;
+import ru.hse.hwproj.model.Homework;
 
 import java.util.List;
 
