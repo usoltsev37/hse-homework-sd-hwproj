@@ -1,16 +1,18 @@
 package ru.hse.hwproj.logic.checker;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import ru.hse.hwproj.model.HwSubmission;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Component
 public class GithubSubmissionChecker implements SubmissionChecker {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GithubSubmissionChecker.class);
 
     @Override
     public HwSubmission checkSubmission(String title, HwSubmission hwSubmission) {
@@ -19,15 +21,18 @@ public class GithubSubmissionChecker implements SubmissionChecker {
 
         try {
             int gitExitCode = executeCommand("bash", "-c", request).waitFor();
-            if (gitExitCode != 0) throw new RuntimeException();
+            if (gitExitCode != 0) LOGGER.error("Git clone was unsuccessful");
+
             Process checkerProcess = executeCommand("bash", "script.sh", fileNamePath.toString());
             int checkerExitCode = checkerProcess.waitFor();
+
             String checkerVerdict = new StringBuilder()
                     .append("code = " + checkerExitCode + "\n")
                     .append(new String(checkerProcess.getInputStream().readAllBytes(), StandardCharsets.UTF_8) + "\n")
                     .append(new String(checkerProcess.getErrorStream().readAllBytes(), StandardCharsets.UTF_8)).toString();
             hwSubmission.setCheckerVerdict(checkerVerdict);
         } catch (InterruptedException | IOException e) {
+            LOGGER.error("Error during external command execution");
             throw new RuntimeException(e);
         }
 
@@ -38,7 +43,7 @@ public class GithubSubmissionChecker implements SubmissionChecker {
         try {
             return new ProcessBuilder().command(args).start();
         } catch (IOException e) {
-            Logger.getGlobal().log(Level.WARNING, "Error during external command execution");
+            LOGGER.error("Error during external command execution");
             throw new RuntimeException();
         }
     }
