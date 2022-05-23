@@ -1,5 +1,22 @@
 # HWProj
 
+## Инструкция по запуску
+
+Запуск сервера вместе с базой данных и раннером происходит при помощи `docker compose`
+
+```bash
+sudo docker compose build
+sudo docker compose up
+```
+
+Для запуска клиента необходимо установить фреймворк [node.js](https://nodejs.org/en/).
+```bash
+cd web-client
+npm install
+np run serve -- --port 4000
+```
+Порт нужно указать обязательно, так как порт по умолчанию уже будет занят сервером. Можно указать любой свободный порт.
+
 ## Архитектура
 
 <p align="center">
