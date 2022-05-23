@@ -1,0 +1,20 @@
+.mrgnbtm {
+    margin-bottom: 10px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+input, textarea {
+    margin-right: 10px;
+}
+
+.id-input {
+    width: 80px;
+}
+
+.descr {
+    width: 400px;
+    height: 200px;
+}

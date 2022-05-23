@@ -1,0 +1,42 @@
+version: "3.6"
+
+services:
+
+  database:
+    build: ./src/database/
+    restart: always
+    environment:
+      POSTGRESQL_ROOT_USER: postgres
+      POSTGRESQL_ROOT_PASSWORD: postgres
+      POSTGRESQL_DATABASE: hwproj
+      POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      - webserver
+    ports:
+      - "5432:5432"
+
+  rabbitmq:
+    image: rabbitmq:3.10-management
+    restart: always
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - webserver
+
+  server:
+    build: .
+    restart: on-failure
+    depends_on:
+      - database
+      - rabbitmq
+    links:
+      - database
+      - rabbitmq
+    networks:
+      - webserver
+    ports:
+      - "8080:8080"
+
+networks:
+  webserver:

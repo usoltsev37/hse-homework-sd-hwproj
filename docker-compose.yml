@@ -1,0 +1,70 @@
+version: "3.6"
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3.10-management
+    restart: always
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    networks:
+      - hwproj
+
+  database:
+    build: database
+    restart: always
+    environment:
+      POSTGRESQL_ROOT_USER: postgres
+      POSTGRESQL_ROOT_PASSWORD: postgres
+      POSTGRESQL_DATABASE: hwproj
+      POSTGRES_HOST_AUTH_METHOD: trust
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+    networks:
+      - hwproj
+    ports:
+      - "5432:5432"
+
+  runner:
+    build: runner
+    restart: on-failure
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    depends_on:
+      - database
+      - rabbitmq
+    links:
+      - database
+      - rabbitmq
+    networks:
+      - hwproj
+    ports:
+      - "8081:8081"
+
+  server:
+    build: web-server/hwproj
+    restart: on-failure
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    depends_on:
+      - database
+      - rabbitmq
+    links:
+      - database
+      - rabbitmq
+    networks:
+      - hwproj
+    ports:
+      - "8080:8080"
+
+networks:
+  hwproj:

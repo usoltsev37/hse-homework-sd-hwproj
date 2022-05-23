@@ -1,5 +1,23 @@
 # HWProj
 
+## Инструкция по запуску
+
+Запуск сервера вместе с базой данных и раннером происходит при помощи `docker compose`
+
+```bash
+sudo docker compose build
+sudo docker compose up
+```
+
+Для запуска клиента необходимо установить фреймворк [node.js](https://nodejs.org/en/).
+```bash
+cd web-client
+npm install
+np run serve -- --port <port>
+```
+Порт нужно указать обязательно, так как порт по умолчанию(8080) уже будет занят сервером. Можно указать любой свободный порт.
+Далее в браузере нужно открыть либо адрес `http://localhost:<port>/teacher`, либо `http://localhost:<port>/student`. По этим адресам будут страницы для учителя и студента соответственно. 
+
 ## Архитектура
 
 <p align="center">
